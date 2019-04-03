@@ -9,25 +9,23 @@ var recognition = new SpeechRecognition();
 var speechRecognitionList = new SpeechGrammarList();
 speechRecognitionList.addFromString(grammar, 1);
 recognition.grammars = speechRecognitionList;
-//recognition.continuous = false;
+recognition.continuous = true;
 recognition.lang = 'en-US';
 recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 
 var diagnostic = document.querySelector('.output');
+var service = document.querySelector('.service');
 var bg = document.querySelector('html');
-var hints = document.querySelector('.hints');
 
-var colorHTML= '';
-colors.forEach(function(v, i, a){
-  console.log(v, i);
-  colorHTML += '<span style="background-color:' + v + ';"> ' + v + ' </span>';
-});
-hints.innerHTML = 'Tap/click then say a color to change the background color of the app. Try '+ colorHTML + '.';
-
-document.body.onclick = function() {
+document.querySelector('.start-captioning').onclick = function() {
   recognition.start();
-  console.log('Ready to receive a color command.');
+  console.log('Ready to caption');
+}
+
+document.querySelector('.stop-captioning').onclick = function() {
+  recognition.stop();
+  console.log('Ready to caption');
 }
 
 recognition.onresult = function(event) {
@@ -41,19 +39,19 @@ recognition.onresult = function(event) {
   // We then return the transcript property of the SpeechRecognitionAlternative object
 
   var last = event.results.length - 1;
-  var color = event.results[last][0].transcript;
+  var words = event.results[last][0].transcript;
 
-  diagnostic.textContent = 'Result received: ' + color + '.';
-  bg.style.backgroundColor = color;
+  diagnostic.textContent += ' ' + words + '.';
+  //service.innerHTML = recognition.serviceURI;
+  bg.style.backgroundColor = words;
   console.log('Confidence: ' + event.results[0][0].confidence);
 }
 
 recognition.onspeechend = function() {
-  recognition.stop();
 }
 
 recognition.onnomatch = function(event) {
-  diagnostic.textContent = "I didn't recognise that color.";
+  //diagnostic.textContent = "I didn't recognise any words";
 }
 
 recognition.onerror = function(event) {
