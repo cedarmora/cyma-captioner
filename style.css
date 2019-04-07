@@ -9,24 +9,43 @@ html {
 body {
   height: inherit;
   overflow: hidden;
-}
-
-h1, p {
+  background-color: #000;
+  color: #fff;
   font-family: sans-serif;
-  text-align: center;
-  padding: 20px;
 }
 
 .output {
-  height: 100px;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 10vh;
+  line-height: 11vh;
   overflow: auto;
   position: absolute;
   bottom: 0px;
   right: 0;
   left: 0;
-  background-color: rgba(255,255,255,0.2);
+  overflow: hidden;
 }
 
-ul {
-  margin: 0;
+#footer {
+  position: absolute;
+  bottom: 0px;
+  right: 0;
+  left: 0;
+}
+
+#footer>* {
+  display: inline-block;
+}
+
+#right-footer {
+  float: right;
+  transform: translateY(50%);
+}
+
+.start-captioning, .stop-captioning {
+  background-color: #3898EC;
+  border-color: #3898EC;
+  color: #fff;
+  text-transform: uppercase;
 }
