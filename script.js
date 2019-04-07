@@ -18,6 +18,10 @@ var diagnostic = document.querySelector('.output');
 var service = document.querySelector('.service');
 var bg = document.querySelector('html');
 
+window.onload = function() {
+  recognition.start();
+}
+
 document.querySelector('.start-captioning').onclick = function() {
   recognition.start();
   console.log('Ready to caption');
